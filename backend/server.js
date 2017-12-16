@@ -30,7 +30,7 @@ async function createServer() {
 async function migrate() {
   const dbConfig = c.get('db');
   if (dbConfig) {
-    const migration = DBMigrate.getInstance(true, { config: { dev: dbConfig }, cwd: './backend' });
+    const migration = DBMigrate.getInstance(true, { config: { dev: dbConfig }, cwd: '.' });
     await migration.up();
   }
 }
@@ -52,8 +52,8 @@ async function config(application) {
     next(err);
   });
 
-  await autoImport('./backend/models');
-  await autoImport('./backend/', false);
+  await autoImport('./models');
+  await autoImport('.', false);
   // error handler
   // eslint-disable-next-line no-unused-vars
   application.use(errorHandler());
