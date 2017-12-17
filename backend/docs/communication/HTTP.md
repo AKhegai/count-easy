@@ -5,6 +5,6 @@ We divided the endpoints into:
 * [Payments][PAYMENTS]
 * [Categories][CATEGORIES]
 
-[USERS]: http-endpoint/users.md
-[PAYMENTS]: http-endpoint/payments.md
-[CATEGORIES]: http-endpoint/categories.md
+[USERS]: ./http-endpoints/users.md
+[PAYMENTS]: ./http-endpoints/payments.md
+[CATEGORIES]: ./http-endpoints/categories.md
