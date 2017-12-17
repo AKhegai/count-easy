@@ -7,7 +7,7 @@ import DBMigrate from 'db-migrate';
 import c from 'config';
 import errorHandler from 'errorhandler';
 import passport from 'passport';
-import { jwtStrategy } from './auth';
+import {jwtStrategy} from './auth';
 import autoImport from './utils/auto-import';
 import router from './controllers/';
 import Pathes from './consts/pathes';
@@ -30,7 +30,7 @@ async function createServer() {
 async function migrate() {
   const dbConfig = c.get('db');
   if (dbConfig) {
-    const migration = DBMigrate.getInstance(true, { config: { dev: dbConfig }, cwd: '.' });
+    const migration = DBMigrate.getInstance(true, {config: {dev: dbConfig}, cwd: '.'});
     await migration.up();
   }
 }
@@ -41,15 +41,13 @@ async function config(application) {
   application.use(initPassport());
   application.use(logger('dev'));
   application.use(bodyParser.json());
-  application.use(bodyParser.urlencoded({ extended: false }));
+  application.use(bodyParser.urlencoded({extended: false}));
   application.use(cookieParser());
   application.use(express.static(path.join(__dirname, 'public')));
   application.use(Pathes.Root, router);
-  // catch 404 and forward to error handler
-  application.use((req, res, next) => {
-    const err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+
+  application.use('*', function (req, res) {
+    res.sendFile('index.html');
   });
 
   await autoImport('./models');
